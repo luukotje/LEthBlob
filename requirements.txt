@@ -1,0 +1,6 @@
+pytz~=2022.7.1
+binwalk~=2.3.2
+typer~=0.7.0
+web3~=6.0.0
+colorama~=0.4.6
+pyfiglet~=0.8.post1
