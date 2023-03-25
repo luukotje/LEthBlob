@@ -6,11 +6,11 @@ def extract_from_block(w3, block_number, address, check_address, archive):
     files_found = False
     for tx_hash in block.transactions:
         tx = w3.eth.get_transaction(tx_hash)
-        if (not archive) or (tx.input[2:].beginswith('504b0304')):
+        if (not archive) or ('504b0304' in tx.input[2:]):
             if (not check_address) or (address == tx['from']):
                 input_data = bytes.fromhex(tx.input[2:])
                 file_name = str(block_number) + '_' + tx_hash.hex()
-                f=open(file_name, 'wb')
+                f = open(file_name, 'wb')
                 f.write(input_data)
                 f.close()
                 results = binwalk.scan(file_name, signature=True, quiet=True, dd='.*', extract=True, directory='extracted/')
@@ -44,7 +44,7 @@ def extract_transaction(w3, tx_hash):
     block_number = tx.blockNumber
     input_data = bytes.fromhex(tx.input[2:])
     file_name = str(block_number) + '_' + tx_hash
-    f=open(file_name, 'wb')
+    f = open(file_name, 'wb')
     f.write(input_data)
     f.close()
     results = binwalk.scan(file_name, signature=True, quiet=True, dd='.*', extract=True, directory='extracted/')
