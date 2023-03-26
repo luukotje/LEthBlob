@@ -13,6 +13,6 @@ def search_transactions_by_address(w3, begin, end, address):
             tx = w3.eth.get_transaction(tx_hash)
 
             if address == tx['from']:
-                print(tx_hash.hex())
+                print('transaction:' + tx_hash.hex())
                 transaction_found = True
     return transaction_found
